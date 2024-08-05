@@ -30,9 +30,9 @@ if __name__ == '__main__':
         '''
         try:
             coin.Base.metadata.create_all(bind=db.engine)
-            print(f"Se creo correctamente la base de datos")
+            print(f"Se creo correctamente la tabla")
         except SQLAlchemyError as e:
-            print(f"Error al conectar a la base de datos: {str(e)}")
+            print(f"Error al crear tabla: {str(e)}")
 
     except Exception as e:
         print({e})
