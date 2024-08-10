@@ -10,6 +10,7 @@ class Coins(Base):
     __tablename__ = "coins"
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(25))
+    fiat = Column(String(25))
     ask = Column(Float)
     totalAsk = Column(Float)
     bid = Column(Float)
