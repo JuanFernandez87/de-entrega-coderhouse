@@ -1,5 +1,5 @@
 from app.request import request
-from app.data import db, load
+from app.data import db
 from app.models import coin
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -19,6 +19,7 @@ if __name__ == '__main__':
             en el caso de que no se obtenga respuesta se esperan 10 segundos y vuelve a realizar la consulta
         '''
         df = request.request_api_cripto(coin_list, exchange, fiat, volume)
+        print(df)
 
         '''
             Creo las tablas en Redshift con las clases guardadas en models
