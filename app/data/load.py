@@ -18,5 +18,6 @@ def load_data(df: pd.DataFrame):
     try:
         # Guardo el df como sql
         df.to_sql('coins', db.engine, index=False, if_exists='append')
+        print(f"Se guardaron los datos correctamente")
     except Exception as e:
-        print({e})
+        print(f"Error al guardar los datos: {str(e)}")

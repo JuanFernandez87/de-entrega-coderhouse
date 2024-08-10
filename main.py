@@ -1,7 +1,5 @@
 from app.request import request
-from app.data import db, load
-from app.models import coin
-from sqlalchemy.exc import SQLAlchemyError
+from app.data import create, load
 
 if __name__ == '__main__':
     '''
@@ -14,6 +12,8 @@ if __name__ == '__main__':
         fiat = 'ars'
         volume = 1.0
 
+        df_columns = ['name', 'fiat', 'ask', 'totalAsk', 'bid', 'totalBid', 'time', 'updated']
+
         '''
             Función que extrae datos de una API pública y genera una lista de diccionarios,
             en el caso de que no se obtenga respuesta se esperan 10 segundos y vuelve a realizar la consulta
@@ -23,20 +23,12 @@ if __name__ == '__main__':
         '''
             Creo las tablas en Redshift con las clases guardadas en models
         '''
-        try:
-            coin.Base.metadata.create_all(bind=db.engine)
-            print(f"Se creo correctamente la tabla")
-        except SQLAlchemyError as e:
-            print(f"Error al crear tabla: {str(e)}")
-            
+        create.create_table(df_columns)
+
         '''
             Carga la lista en la base de datos
         '''
-        try:
-            load.load_data(df)
-            print(f"Se guardaron los datos correctamente")
-        except Exception as e:
-            print(f"Error al guardar los datos: {str(e)}")
+        load.load_data(df)    
 
     except Exception as e:
         print({e})
