@@ -1,6 +1,5 @@
-import time
 from app.request import request
-from app.data import db
+from app.data import db, load
 from app.models import coin
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -19,12 +18,8 @@ if __name__ == '__main__':
             Función que extrae datos de una API pública y genera una lista de diccionarios,
             en el caso de que no se obtenga respuesta se esperan 10 segundos y vuelve a realizar la consulta
         '''
-        prices_of_coins = []
-        while not prices_of_coins:
-            prices_of_coins = request.request_api_cripto(coin_list, exchange, fiat, volume)
-            if not prices_of_coins:
-                time.sleep(10)
-        
+        df = request.request_api_cripto(coin_list, exchange, fiat, volume)
+
         '''
             Creo las tablas en Redshift con las clases guardadas en models
         '''
