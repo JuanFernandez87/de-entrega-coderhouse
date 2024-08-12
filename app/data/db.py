@@ -10,5 +10,5 @@ REDSHIFT_HOST=os.environ.get("REDSHIFT_HOST")
 REDSHIFT_PORT=os.environ.get("REDSHIFT_PORT")
 REDSHIFT_DB=os.environ.get("REDSHIFT_DB")
 
-# Creao el motor de conexión
-engine = create_engine(f'redshift+psycopg2://{REDSHIFT_USER}:{REDSHIFT_PASS}@{REDSHIFT_HOST}:{REDSHIFT_PORT}/{REDSHIFT_DB}')
+# Creo el motor de conexión
+engine = create_engine(f'postgresql+psycopg2://{REDSHIFT_USER}:{REDSHIFT_PASS}@{REDSHIFT_HOST}:{REDSHIFT_PORT}/{REDSHIFT_DB}')
