@@ -1,5 +1,7 @@
 from app.request import request
-from app.data import create, load
+from app.data import db, load
+from app.models import coin
+from sqlalchemy.exc import SQLAlchemyError
 
 if __name__ == '__main__':
     '''
@@ -23,7 +25,11 @@ if __name__ == '__main__':
         '''
             Creo las tablas en Redshift con las clases guardadas en models
         '''
-        create.create_table(df_columns)
+        try:
+            coin.Base.metadata.create_all(bind=db.engine)
+            print(f"Se creo correctamente la base de datos")
+        except SQLAlchemyError as e:
+            print(f"Error al conectar a la base de datos: {str(e)}")
 
         '''
             Carga la lista en la base de datos
